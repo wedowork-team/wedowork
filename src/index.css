@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-dark-bg: #080808;
+  --color-dark-surface: #0c0c0c;
+  --color-dark-card: #0f0f0f;
+  --color-dark-border: #1a1a1a;
+  --color-dark-border-light: #222222;
+  
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #888888;
+  --color-text-muted: #444444;
+}
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-text-primary font-sans antialiased selection:bg-white selection:text-black;
+  }
+  
+  h1, h2, h3 {
+    @apply font-serif italic;
+  }
+}
+
+.glass-card {
+  @apply bg-dark-card border border-dark-border rounded-xl transition-all duration-300;
+}
+
+.secondary-header {
+  @apply text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold;
+}
+
+.btn-publish {
+  @apply px-4 py-1.5 bg-[#e0e0e0] text-black text-xs font-bold uppercase tracking-wider rounded hover:bg-white transition-colors active:scale-95 cursor-pointer;
+}
