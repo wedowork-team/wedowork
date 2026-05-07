@@ -1,13 +1,32 @@
+import { useState } from "react";
 import logo from "../assets/logo.png";
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    navigate('/admin');
+
+    const adminEmails = [
+      "abhishekjha.virus@gmail.com",
+      "sksk61082@gmail.com",
+      "friend2@gmail.com",
+      "friend3@gmail.com"
+    ];
+
+    // ADMIN LOGIN
+    if (adminEmails.includes(email)) {
+      navigate("/admin");
+    }
+
+    // USER LOGIN
+    else {
+      navigate("/user-dashboard");
+    }
   };
 
   return (
@@ -42,8 +61,10 @@ export default function Login() {
           <div className="space-y-2">
             <label className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold block">Identifier</label>
             <input 
-              type="email" 
-              placeholder="name@zenith.com"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="name@gmail.com"
               className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors"
             />
           </div>
@@ -54,7 +75,9 @@ export default function Login() {
               <button type="button" className="text-[10px] uppercase tracking-widest text-text-muted hover:text-white transition-colors font-bold">Lost?</button>
             </div>
             <input 
-              type="password" 
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors tracking-widest"
             />

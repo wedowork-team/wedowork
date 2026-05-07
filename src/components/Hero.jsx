@@ -9,7 +9,6 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           className="mb-6"
         >
-          <span className="secondary-header">Design System: Sophisticated Dark</span>
         </motion.div>
 
         <motion.h1
@@ -29,7 +28,7 @@ export default function Hero() {
           High-performance interfaces and cinematic storytelling. Managing digital presence for maximum scalability and clinical precision.
         </motion.p>
 
-        <div className="flex gap-8">
+        {/* <div className="flex gap-8">
           <div className="flex flex-col">
             <span className="text-[32px] font-serif italic">98%</span>
             <span className="secondary-header !tracking-tighter">Sync Accuracy</span>
@@ -38,7 +37,7 @@ export default function Hero() {
             <span className="text-[32px] font-serif italic">12</span>
             <span className="secondary-header !tracking-tighter">Global Partners</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

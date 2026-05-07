@@ -27,10 +27,10 @@ export default function Navbar() {
         <div className="flex items-center gap-6">
           <div className="hidden sm:flex items-center gap-2 text-text-muted text-[10px] font-mono">
             <div className="w-1.5 h-1.5 rounded-full bg-green-500/50"></div>
-            <span>LIVE: 3000</span>
+            <span>LIVE: 33</span>
           </div>
           <Link to="/login" className="btn-publish" id="admin-login-btn">
-            Admin Login
+            Login
           </Link>
         </div>
       </div>
