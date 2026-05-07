@@ -1,9 +1,15 @@
 import { motion } from 'motion/react';
+import MeteorBackground from './meteor';
 
 export default function Hero() {
   return (
-    <section className="relative pt-32 pb-24 px-8" id="hero-section">
-      <div className="max-w-4xl mx-auto" id="hero-content">
+    <section className="relative pt-32 pb-24 px-8 overflow-hidden" id="hero-section">
+      <MeteorBackground />
+
+      <div
+        className="max-w-4xl mx-auto relative z-10"
+        id="hero-content"
+      >
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
