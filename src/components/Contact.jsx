@@ -20,7 +20,7 @@ export default function Contact() {
                 <label className="text-[10px] font-mono tracking-widest text-white/40 uppercase">Name</label>
                 <input 
                   type="text" 
-                  placeholder="John Doe"
+                  placeholder="Name"
                   className="w-full bg-black border border-brand-border px-4 py-3 text-sm focus:outline-none focus:border-white/40 transition-colors"
                 />
               </div>
@@ -28,7 +28,7 @@ export default function Contact() {
                 <label className="text-[10px] font-mono tracking-widest text-white/40 uppercase">Email</label>
                 <input 
                   type="email" 
-                  placeholder="john@company.com"
+                  placeholder="name@gmail.com"
                   className="w-full bg-black border border-brand-border px-4 py-3 text-sm focus:outline-none focus:border-white/40 transition-colors"
                 />
               </div>
@@ -38,7 +38,7 @@ export default function Contact() {
               <label className="text-[10px] font-mono tracking-widest text-white/40 uppercase">Message</label>
               <textarea 
                 rows={4}
-                placeholder="How can we help?"
+                placeholder="Description...."
                 className="w-full bg-black border border-brand-border px-4 py-3 text-sm focus:outline-none focus:border-white/40 transition-colors resize-none"
               />
             </div>
