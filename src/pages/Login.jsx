@@ -7,6 +7,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showSignup, setShowSignup] = useState(false);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -35,9 +36,6 @@ export default function Login() {
         <img src={logo} alt="Logo" className="w-16 h-16 object-contain" />
         <h1 className="font-serif italic text-2xl">WeDoWork</h1>
       </div>
-      <div className="absolute top-8 right-8 text-[10px] font-mono text-text-muted">
-        v2.4.0-STABLE
-      </div>
 
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
@@ -49,17 +47,17 @@ export default function Login() {
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-6">
             <span className="text-xs">🔒</span>
-            <span className="text-[10px] uppercase tracking-widest text-text-muted font-bold">Admin Terminal</span>
+            <span className="text-[10px] uppercase tracking-widest text-text-muted font-bold">Terminal</span>
           </div>
           <div className="flex flex-col items-center gap-4">
             <img src={logo} alt="Logo" className="w-28 h-28 object-contain" />
-            <h2 className="text-4xl font-serif italic mb-2">WeDoWork Admin</h2>
+            <h2 className="text-4xl font-serif italic mb-2">WeDoWork</h2>
           </div>
         </div>
 
         <form className="space-y-6" onSubmit={handleSignIn}>
           <div className="space-y-2">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold block">Identifier</label>
+            <label className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold block">Email</label>
             <input 
               type="email"
               value={email}
@@ -71,8 +69,8 @@ export default function Login() {
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold block">Secret_Key</label>
-              <button type="button" className="text-[10px] uppercase tracking-widest text-text-muted hover:text-white transition-colors font-bold">Lost?</button>
+              <label className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold block">Password</label>
+              <button type="button" className="text-[10px] uppercase tracking-widest text-text-muted hover:text-white transition-colors font-bold">Forgot_Password?</button>
             </div>
             <input 
               type="password"
@@ -85,10 +83,42 @@ export default function Login() {
 
           <button 
             type="submit" 
-            className="w-full bg-white text-black py-4 font-bold uppercase tracking-widest text-xs hover:bg-white/90 transition-all flex items-center justify-center gap-2 mt-4"
-          >
-            Sign In <span>→</span>
+            className="
+              w-full
+              border border-[#8a8a8a]
+              bg-transparent
+              text-white
+              py-2
+              rounded-2xl
+              font-bold
+              uppercase
+              tracking-[0.25em]
+              text-xs
+              flex
+              items-center
+              justify-center
+              gap-3
+              mt-4
+              transition-all
+              duration-300
+              hover:bg-white
+              hover:text-black
+              hover:shadow-[0_0_25px_rgba(255,255,255,0.25)]
+              hover:scale-[1.02]
+              active:scale-[0.98]
+            "
+            >
+            SIGN IN <span className="text-lg">→</span>
           </button>
+          <div className="flex justify-end mt-4">
+            <button
+              type="button"
+              onClick={() => setShowSignup(true)}
+              className="text-[11px] tracking-[0.2em] text-[#666] hover:text-white transition-colors uppercase"
+            >
+              SIGN_UP?
+            </button>
+          </div>
         </form>
 
         <div className="mt-10 pt-8 border-t border-dark-border text-center">
@@ -97,13 +127,70 @@ export default function Login() {
             <span className="text-[10px] uppercase tracking-widest text-text-muted font-bold">All systems operational</span>
           </div>
         </div>
-
-        <div className="mt-12 text-center">
-          <p className="text-[9px] uppercase tracking-[0.15em] text-white/20 leading-relaxed max-w-[240px] mx-auto italic font-serif">
-            Unauthorized access to this terminal is strictly prohibited and monitored.
-          </p>
-        </div>
       </motion.div>
+
+      {showSignup && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+
+          <div className="w-full max-w-[420px] bg-[#050505] border border-[#222] rounded-3xl p-8 relative">
+
+            <button
+              onClick={() => setShowSignup(false)}
+              className="absolute top-4 right-5 text-[#666] hover:text-white text-2xl"
+            >
+              ×
+            </button>
+
+            <h2 className="text-4xl font-serif italic text-center mb-8">
+              Sign Up
+            </h2>
+
+            <div className="space-y-5">
+
+              <input
+                type="text"
+                placeholder="Full Name"
+                className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30"
+              />
+
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30"
+              />
+
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30"
+              />
+
+              <button
+                onClick={() => setShowSignup(false)}
+                className="
+                  w-full
+                  border border-[#8a8a8a]
+                  bg-transparent
+                  text-white
+                  py-2
+                  rounded-2xl
+                  font-bold
+                  uppercase
+                  tracking-[0.25em]
+                  text-xs
+                  transition-all
+                  duration-300
+                  hover:bg-white
+                  hover:text-black
+                "
+                >
+                CREATE ACCOUNT →
+              </button>
+
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="fixed bottom-0 left-0 w-full h-[1px] bg-white/10 opacity-20"></div>
       
@@ -114,7 +201,6 @@ export default function Login() {
       <div className="fixed bottom-8 right-8 flex gap-6 text-[10px] uppercase tracking-widest text-text-muted font-bold">
         <a href="#" className="hover:text-white transition-colors">Privacy</a>
         <a href="#" className="hover:text-white transition-colors">Terms</a>
-        <a href="#" className="hover:text-white transition-colors">GitHub</a>
       </div>
 
       {/* Hero background image in bottom right for that terminal vibe */}
