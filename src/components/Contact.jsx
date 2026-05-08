@@ -1,53 +1,75 @@
+import logo from "../assets/logo.png";
 import { motion } from 'motion/react';
 
 export default function Contact() {
   return (
-    <section className="py-24 px-6 bg-white/[0.02]" id="contact">
-      <div className="max-w-3xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass-card p-12 md:p-16 text-center border-white/10"
-          id="contact-form-container"
-        >
-          <h2 className="text-4xl font-display font-bold mb-4">Start the Journey</h2>
-          <p className="text-gray-400 mb-12">Tell us about your project.</p>
+    <section className="w-full flex justify-center px-6 py-20 bg-black">
+      
+      <div className="w-full max-w-6xl border border-[#1a1a1a] rounded-[40px] bg-[#050505] p-20">
 
-          <form className="space-y-6 text-left" onSubmit={(e) => e.preventDefault()} id="lead-form">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-[10px] font-mono tracking-widest text-white/40 uppercase">Name</label>
-                <input 
-                  type="text" 
-                  placeholder="Name"
-                  className="w-full bg-black border border-brand-border px-4 py-3 text-sm focus:outline-none focus:border-white/40 transition-colors"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-mono tracking-widest text-white/40 uppercase">Email</label>
-                <input 
-                  type="email" 
-                  placeholder="name@gmail.com"
-                  className="w-full bg-black border border-brand-border px-4 py-3 text-sm focus:outline-none focus:border-white/40 transition-colors"
-                />
-              </div>
-            </div>
+        <div className="space-y-16">
 
-            <div className="space-y-2">
-              <label className="text-[10px] font-mono tracking-widest text-white/40 uppercase">Message</label>
-              <textarea 
-                rows={4}
-                placeholder="Description...."
-                className="w-full bg-black border border-brand-border px-4 py-3 text-sm focus:outline-none focus:border-white/40 transition-colors resize-none"
-              />
-            </div>
+          {/* COMPANY BRANDING */}
+          <div className="flex items-center justify-center gap-4">
 
-            <button type="submit" className="btn-primary w-full mt-4" id="submit-inquiry-btn">
-              Send Inquiry
-            </button>
-          </form>
-        </motion.div>
+  <img
+    src={logo}
+    alt="Logo"
+    className="w-16 h-16 object-contain"
+  />
+
+  <h1 className="font-serif italic text-5xl text-white">
+    WeDoWork
+  </h1>
+
+</div>
+
+          {/* SERVICE */}
+          <div>
+            <label className="text-[12px] uppercase tracking-[0.4em] text-[#666]">
+              Select Service
+            </label>
+
+            <select className="w-full mt-6 bg-black border border-[#2a2a2a] px-5 py-5 text-white text-3xl rounded-2xl outline-none">
+              <option>Video Editing</option>
+              <option>Website Development</option>
+              <option>Social Media Handling</option>
+              <option>CV Designing</option>
+            </select>
+          </div>
+
+          {/* PACKAGE */}
+          <div>
+            <label className="text-[12px] uppercase tracking-[0.4em] text-[#666]">
+              Select Package
+            </label>
+
+            <select className="w-full mt-6 bg-black border border-[#2a2a2a] px-5 py-5 text-white text-3xl rounded-2xl outline-none">
+              <option>Basic</option>
+              <option>Professional</option>
+              <option>Premium</option>
+            </select>
+          </div>
+
+          {/* MESSAGE */}
+          <div>
+            <label className="text-[12px] uppercase tracking-[0.4em] text-[#666]">
+              Message
+            </label>
+
+            <textarea
+              rows="5"
+              placeholder="Tell Us About Your Project......."
+              className="w-full mt-6 bg-black border border-white px-12 py-12 text-[#888] text-3xl rounded-[35px] outline-none resize-none"
+            />
+          </div>
+
+          {/* BUTTON */}
+          <button className="w-full border border-white rounded-full py-8 text-3xl hover:bg-white hover:text-black transition-all duration-300">
+            Send Inquiry
+          </button>
+
+        </div>
       </div>
     </section>
   );
