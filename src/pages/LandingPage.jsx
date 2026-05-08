@@ -19,7 +19,6 @@ export default function LandingPage() {
           <Hero />
           <Services />
           <Portfolio />
-          <Contact />
         </div>
       </main>
       <Footer />
