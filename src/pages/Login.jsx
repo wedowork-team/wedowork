@@ -1,32 +1,108 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import { motion } from 'motion/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
+import { getFriendlyAuthError } from '../lib/auth-errors';
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showSignup, setShowSignup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [signupName, setSignupName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [signupLoading, setSignupLoading] = useState(false);
+  const [signupSuccessMsg, setSignupSuccessMsg] = useState("");
+  const [signupErrorMsg, setSignupErrorMsg] = useState("");
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setErrorMsg("");
 
-    const adminEmails = [
-      "abhishekjha.virus@gmail.com",
-      "sksk61082@gmail.com",
-      "friend2@gmail.com",
-      "friend3@gmail.com"
-    ];
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    // ADMIN LOGIN
-    if (adminEmails.includes(email)) {
-      navigate("/admin");
+      if (error) {
+        if (error.message.toLowerCase().includes('email not confirmed')) {
+          throw new Error("Please verify your email address before logging in.");
+        }
+        throw error;
+      }
+
+      // Check role
+      let { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', data.user.id)
+        .single();
+
+      // If profile doesn't exist, create it (assuming this is first login after verification)
+      if (!profile) {
+        const { data: newProfile, error: insertError } = await supabase
+          .from('profiles')
+          .insert([{
+            id: data.user.id,
+            email: data.user.email,
+            full_name: data.user.user_metadata?.full_name || email.split('@')[0],
+            role: 'user',
+          }])
+          .select()
+          .single();
+          
+        if (insertError) throw new Error("Failed to create user profile: " + insertError.message);
+        profile = newProfile;
+      }
+
+      // Route based on role
+      if (profile.role === 'admin') {
+        const destination = location.state?.from?.pathname || "/admin";
+        navigate(destination);
+      } else {
+        navigate("/user-dashboard");
+      }
+    } catch (error) {
+      setErrorMsg(getFriendlyAuthError(error));
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    // USER LOGIN
-    else {
-      navigate("/user-dashboard");
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    setSignupLoading(true);
+    setSignupErrorMsg("");
+    setSignupSuccessMsg("");
+    
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: signupEmail,
+        password: signupPassword,
+        options: {
+          data: {
+            full_name: signupName
+          }
+        }
+      });
+      
+      if (error) throw error;
+      
+      setSignupSuccessMsg("Registration successful! Please check your email to verify your account before logging in.");
+      setSignupName("");
+      setSignupEmail("");
+      setSignupPassword("");
+    } catch (error) {
+      setSignupErrorMsg(getFriendlyAuthError(error));
+    } finally {
+      setSignupLoading(false);
     }
   };
 
@@ -70,7 +146,7 @@ export default function Login() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold block">Password</label>
-              <button type="button" className="text-[10px] uppercase tracking-widest text-text-muted hover:text-white transition-colors font-bold">Forgot_Password?</button>
+              <button type="button" onClick={() => navigate('/forgot-password')} className="text-[10px] uppercase tracking-widest text-text-muted hover:text-white transition-colors font-bold">Forgot_Password?</button>
             </div>
             <input 
               type="password"
@@ -81,9 +157,16 @@ export default function Login() {
             />
           </div>
 
+          {errorMsg && (
+            <div className="text-red-500 text-xs text-center bg-red-500/10 border border-red-500/20 py-2 rounded">
+              {errorMsg}
+            </div>
+          )}
+
           <button 
             type="submit" 
-            className="
+            disabled={isLoading}
+            className={`
               w-full
               border border-[#8a8a8a]
               bg-transparent
@@ -101,14 +184,10 @@ export default function Login() {
               mt-4
               transition-all
               duration-300
-              hover:bg-white
-              hover:text-black
-              hover:shadow-[0_0_25px_rgba(255,255,255,0.25)]
-              hover:scale-[1.02]
-              active:scale-[0.98]
-            "
+              ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:scale-[1.02] active:scale-[0.98]'}
+            `}
             >
-            SIGN IN <span className="text-lg">→</span>
+            {isLoading ? 'SIGNING IN...' : <>SIGN IN <span className="text-lg">→</span></>}
           </button>
           <div className="flex justify-end mt-4">
             <button
@@ -131,9 +210,7 @@ export default function Login() {
 
       {showSignup && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-
           <div className="w-full max-w-[420px] bg-[#050505] border border-[#222] rounded-3xl p-8 relative">
-
             <button
               onClick={() => setShowSignup(false)}
               className="absolute top-4 right-5 text-[#666] hover:text-white text-2xl"
@@ -145,29 +222,49 @@ export default function Login() {
               Sign Up
             </h2>
 
-            <div className="space-y-5">
+            <form onSubmit={handleSignUp} className="space-y-5">
+              {signupSuccessMsg && (
+                <div className="text-green-500 text-xs text-center bg-green-500/10 border border-green-500/20 py-2 rounded">
+                  {signupSuccessMsg}
+                </div>
+              )}
+              {signupErrorMsg && (
+                <div className="text-red-500 text-xs text-center bg-red-500/10 border border-red-500/20 py-2 rounded">
+                  {signupErrorMsg}
+                </div>
+              )}
 
               <input
                 type="text"
+                required
+                value={signupName}
+                onChange={(e) => setSignupName(e.target.value)}
                 placeholder="Full Name"
                 className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30"
               />
 
               <input
                 type="email"
+                required
+                value={signupEmail}
+                onChange={(e) => setSignupEmail(e.target.value)}
                 placeholder="Email"
                 className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30"
               />
 
               <input
                 type="password"
+                required
+                value={signupPassword}
+                onChange={(e) => setSignupPassword(e.target.value)}
                 placeholder="Password"
                 className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30"
               />
 
               <button
-                onClick={() => setShowSignup(false)}
-                className="
+                type="submit"
+                disabled={signupLoading}
+                className={`
                   w-full
                   border border-[#8a8a8a]
                   bg-transparent
@@ -180,14 +277,12 @@ export default function Login() {
                   text-xs
                   transition-all
                   duration-300
-                  hover:bg-white
-                  hover:text-black
-                "
+                  ${signupLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white hover:text-black'}
+                `}
                 >
-                CREATE ACCOUNT →
+                {signupLoading ? 'CREATING...' : 'CREATE ACCOUNT →'}
               </button>
-
-            </div>
+            </form>
           </div>
         </div>
       )}

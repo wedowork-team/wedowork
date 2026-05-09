@@ -6,6 +6,10 @@ import Dashboard from './pages/Dashboard';
 import AddProject from './pages/AddProject';
 import AdminSidebar from './components/AdminSidebar';
 import Footer from './components/Footer';
+import AdminRoute from './components/AdminRoute';
+import UserRoute from './components/UserRoute';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function AdminLayout({ children }) {
   const location = useLocation();
@@ -68,24 +72,37 @@ export default function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/user-dashboard" element={<UserDashboard />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      
+      <Route path="/user-dashboard" element={
+        <UserRoute>
+          <UserDashboard />
+        </UserRoute>
+      } />
       
       <Route path="/admin" element={
-        <AdminLayout>
-          <Dashboard />
-        </AdminLayout>
+        <AdminRoute>
+          <AdminLayout>
+            <Dashboard />
+          </AdminLayout>
+        </AdminRoute>
       } />
       
       <Route path="/admin/add-project" element={
-        <AdminLayout>
-          <AddProject />
-        </AdminLayout>
+        <AdminRoute>
+          <AdminLayout>
+            <AddProject />
+          </AdminLayout>
+        </AdminRoute>
       } />
 
       <Route path="/admin/projects" element={
-        <AdminLayout>
-          <Dashboard />
-        </AdminLayout>
+        <AdminRoute>
+          <AdminLayout>
+            <Dashboard />
+          </AdminLayout>
+        </AdminRoute>
       } />
 
       <Route path="*" element={<Navigate to="/" replace />} />

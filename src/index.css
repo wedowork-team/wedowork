@@ -27,14 +27,16 @@
   }
 }
 
-.glass-card {
-  @apply bg-dark-card border border-dark-border rounded-xl transition-all duration-300;
-}
+@layer components {
+  .glass-card {
+    @apply bg-dark-card border border-dark-border rounded-xl transition-all duration-300;
+  }
 
-.secondary-header {
-  @apply text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold;
-}
+  .secondary-header {
+    @apply text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold;
+  }
 
-.btn-publish {
-  @apply px-4 py-1.5 bg-[#e0e0e0] text-black text-xs font-bold uppercase tracking-wider rounded hover:bg-white transition-colors active:scale-95 cursor-pointer;
+  .btn-publish {
+    @apply px-4 py-1.5 bg-[#e0e0e0] text-black text-xs font-bold uppercase tracking-wider rounded hover:bg-white transition-colors active:scale-95 cursor-pointer;
+  }
 }
