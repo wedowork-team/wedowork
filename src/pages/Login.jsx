@@ -116,22 +116,22 @@ export default function Login() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-[400px] bg-dark-surface border border-dark-border p-10 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden"
+        className="w-full max-w-[340px] md:max-w-[400px] bg-dark-surface border border-dark-border px-6 py-5 md:px-10 md:py-10 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden"
       >
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
         
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-6">
+        <div className="text-center mb-5 md:mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-4 md:mb-6">
             <span className="text-xs">🔒</span>
             <span className="text-[10px] uppercase tracking-widest text-text-muted font-bold">Terminal</span>
           </div>
-          <div className="flex flex-col items-center gap-4">
-            <img src={logo} alt="Logo" className="w-28 h-28 object-contain" />
-            <h2 className="text-4xl font-serif italic mb-2">WeDoWork</h2>
+          <div className="flex flex-col items-center gap-2 md:gap-4">
+            <img src={logo} alt="Logo" className="w-20 h-20 md:w-28 md:h-28 object-contain" />
+            <h2 className="text-3xl md:text-4xl font-serif italic mb-1 md:mb-2">WeDoWork</h2>
           </div>
         </div>
 
-        <form className="space-y-6" onSubmit={handleSignIn}>
+        <form className="space-y-3 md:space-y-6" onSubmit={handleSignIn}>
           <div className="space-y-2">
             <label className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-bold block">Email</label>
             <input 
@@ -139,7 +139,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="name@gmail.com"
-              className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors"
+              className="w-full bg-black/50 border border-dark-border px-4 py-2.5 md:py-3 text-sm focus:outline-none focus:border-white/30 transition-colors"
             />
           </div>
 
@@ -153,7 +153,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full bg-black/50 border border-dark-border px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors tracking-widest"
+              className="w-full bg-black/50 border border-dark-border px-4 py-2.5 md:py-3 text-sm focus:outline-none focus:border-white/30 transition-colors tracking-widest"
             />
           </div>
 
@@ -200,7 +200,7 @@ export default function Login() {
           </div>
         </form>
 
-        <div className="mt-10 pt-8 border-t border-dark-border text-center">
+        <div className="mt-4 pt-4 md:mt-10 md:pt-8 border-t border-dark-border text-center">
           <div className="flex items-center justify-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
             <span className="text-[10px] uppercase tracking-widest text-text-muted font-bold">All systems operational</span>
@@ -289,13 +289,21 @@ export default function Login() {
 
       <div className="fixed bottom-0 left-0 w-full h-[1px] bg-white/10 opacity-20"></div>
       
-      <div className="fixed bottom-8 left-8 text-[10px] text-text-muted font-mono">
-        © 2024 WeDoWork. All rights reserved.
-      </div>
-      
-      <div className="fixed bottom-8 right-8 flex gap-6 text-[10px] uppercase tracking-widest text-text-muted font-bold">
-        <a href="#" className="hover:text-white transition-colors">Privacy</a>
-        <a href="#" className="hover:text-white transition-colors">Terms</a>
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-full px-6 md:px-8 z-40">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] text-text-muted font-mono">
+          <div className="text-center md:text-left whitespace-nowrap">
+            © 2024 WeDoWork. All rights reserved.
+          </div>
+
+          <div className="flex items-center gap-6 uppercase tracking-widest font-bold whitespace-nowrap">
+            <a href="#" className="hover:text-white transition-colors">
+              Privacy
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              Terms
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Hero background image in bottom right for that terminal vibe */}
