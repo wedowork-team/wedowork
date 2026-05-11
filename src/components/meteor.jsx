@@ -59,8 +59,8 @@ const MeteorBackground = () => {
           style={{
             top: `${meteor.top}%`,
             left: `${meteor.left}%`,
-            animationDelay: `${meteor.delay * 2}s`,
-            animationDuration: `${meteor.duration * 2}s`,
+            animationDelay: `${meteor.delay}s`,
+            animationDuration: `${meteor.duration}s`,
           }}
         />
       ))}
