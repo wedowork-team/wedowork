@@ -16,18 +16,18 @@ const initiatives = [
 
 export default function Dashboard() {
   return (
-    <div className="p-8 max-w-7xl mx-auto">
-      <div className="flex justify-between items-end mb-10">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-8 md:mb-10">
         <div>
-          <h2 className="text-4xl font-serif italic mb-2">Dashboard</h2>
-          <p className="text-text-secondary text-sm">Overview of workspace health and active development cycles.</p>
+          <h2 className="text-2xl md:text-4xl font-serif italic mb-2">Dashboard</h2>
+          <p className="text-text-secondary text-xs sm:text-sm">Overview of workspace health and active development cycles.</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-white text-black text-xs font-bold uppercase tracking-wider rounded transition-all hover:bg-white/90">
+        <button className="flex items-center gap-2 px-4 py-2 bg-white text-black text-xs font-bold uppercase tracking-wider rounded transition-all hover:bg-white/90 self-start sm:self-auto">
           <span>+</span> New Project
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
         {stats.map((stat) => (
           <div key={stat.label} className="bg-dark-card border border-dark-border p-6 rounded-xl hover:border-text-muted transition-colors group">
             <div className="flex justify-between items-center mb-6">
@@ -35,7 +35,7 @@ export default function Dashboard() {
               <span className="text-xl opacity-50 group-hover:opacity-100 transition-opacity">{stat.icon}</span>
             </div>
             <div className="flex items-baseline gap-3">
-              <span className="text-4xl font-serif italic text-white">{stat.value}</span>
+              <span className="text-3xl md:text-4xl font-serif italic text-white">{stat.value}</span>
               <span className={`text-[10px] font-mono ${stat.change.includes('+') ? 'text-green-500' : 'text-text-muted'}`}>
                 {stat.change}
               </span>
@@ -44,12 +44,12 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="bg-dark-card border border-dark-border rounded-xl overflow-hidden mb-12">
-        <div className="p-6 border-b border-dark-border flex justify-between items-center">
+      <div className="bg-dark-card border border-dark-border rounded-xl overflow-hidden mb-8 md:mb-12">
+        <div className="p-4 md:p-6 border-b border-dark-border flex justify-between items-center">
           <h3 className="text-sm font-bold tracking-tight">Active Initiatives</h3>
           <div className="flex gap-2">
             <button className="px-3 py-1 bg-dark-border rounded text-[10px] font-bold uppercase tracking-widest text-text-secondary hover:text-white transition-colors">Filter</button>
-            <button className="px-3 py-1 bg-dark-border rounded text-[10px] font-bold uppercase tracking-widest text-text-secondary hover:text-white transition-colors">Export</button>
+            <button className="px-3 py-1 bg-dark-border rounded text-[10px] font-bold uppercase tracking-widest text-text-secondary hover:text-white transition-colors hidden sm:block">Export</button>
           </div>
         </div>
         <div className="overflow-x-auto">
@@ -86,12 +86,12 @@ export default function Dashboard() {
           </table>
         </div>
         <div className="p-4 bg-black/40 text-center">
-           <button className="text-[10px] uppercase tracking-[0.2em] text-text-muted hover:text-white transition-colors font-bold">View all system logs</button>
+          <button className="text-[10px] uppercase tracking-[0.2em] text-text-muted hover:text-white transition-colors font-bold">View all system logs</button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-dark-card border border-dark-border rounded-xl p-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
+        <div className="bg-dark-card border border-dark-border rounded-xl p-4 md:p-8">
           <h3 className="text-sm font-bold tracking-tight mb-8">System Load</h3>
           <div className="space-y-6">
             <div className="space-y-2">
@@ -115,7 +115,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-dark-card border border-dark-border rounded-xl p-8 flex items-center gap-8">
+        <div className="bg-dark-card border border-dark-border rounded-xl p-4 md:p-8 flex items-center gap-4 md:gap-8">
           <div className="w-16 h-16 rounded-xl border border-dark-border-light bg-[#141414] flex items-center justify-center">
             <LayoutDashboard className="w-8 h-8 text-white/40" />
           </div>
