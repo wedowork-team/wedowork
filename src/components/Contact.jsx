@@ -25,6 +25,7 @@ export default function Contact() {
             </p>
           </div>
 
+          <form action="https://formspree.io/f/xdavbkdg" method="POST" className="space-y-10">
 
 
           {/* SERVICE */}
@@ -33,7 +34,7 @@ export default function Contact() {
               Select Service
             </label>
 
-            <select className="w-full mt-4 bg-black border border-[#2a2a2a] px-6 py-4 text-white text-xl rounded-2xl outline-none focus:border-white transition-all">
+            <select name="service" className="w-full mt-4 bg-black border border-[#2a2a2a] px-6 py-4 text-white text-xl rounded-2xl outline-none focus:border-white transition-all">
               <option>Video Editing</option>
               <option>Website Development</option>
               <option>Social Media Handling</option>
@@ -47,7 +48,7 @@ export default function Contact() {
               Select Package
             </label>
 
-            <select className="w-full mt-4 bg-black border border-[#2a2a2a] px-6 py-4 text-white text-xl rounded-2xl outline-none focus:border-white transition-all">
+            <select name="package" className="w-full mt-4 bg-black border border-[#2a2a2a] px-6 py-4 text-white text-xl rounded-2xl outline-none focus:border-white transition-all">
               <option>Basic</option>
               <option>Professional</option>
               <option>Premium</option>
@@ -61,6 +62,7 @@ export default function Contact() {
             </label>
 
             <textarea
+              name="message"
               rows="5"
               placeholder="Tell Us About Your Project......."
               className="w-full mt-4 bg-black border border-[#2a2a2a] px-8 py-8 text-[#888] text-xl rounded-3xl outline-none resize-none focus:border-white transition-all"
@@ -68,9 +70,10 @@ export default function Contact() {
           </div>
 
           {/* BUTTON */}
-          <button className="w-full border border-white rounded-full py-5 text-lg font-medium hover:bg-white hover:text-black transition-all duration-300">
-            Send Inquiry
+          <button type="submit" className="w-full border border-white rounded-full py-5 text-lg font-medium hover:bg-white hover:text-black transition-all duration-300">
+            Send Message →
           </button>
+          </form>
 
         </div>
       </div>
