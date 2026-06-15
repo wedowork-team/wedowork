@@ -29,9 +29,9 @@ export default function Navbar() {
             <div className="w-1.5 h-1.5 rounded-full bg-green-500/50"></div>
             <span>LIVE: 33</span>
           </div>
-          <Link to="/login" className="btn-publish" id="admin-login-btn">
+          {/* <Link to="/login" className="btn-publish" id="admin-login-btn">
             Login
-          </Link>
+          </Link> */}
         </div>
       </div>
     </motion.nav>

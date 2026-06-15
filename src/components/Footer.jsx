@@ -4,8 +4,8 @@ export default function Footer() {
       
       <div className="flex items-center gap-6">
          <div className="flex items-center gap-2">
-           <img src="https://storage.googleapis.com/kitchen-sink-artifacts/baked-images/1746537302482-12628468757041692.png" alt="Logo" className="w-5 h-5 object-contain" />
-           <span className="text-[9px] uppercase tracking-widest text-text-muted">© 2024 WeDoWork Agency</span>
+           <img src="src/assets/logo.png" alt="Logo" className="w-8 h-8 object-contain" />
+           <span className="text-[9px] uppercase tracking-widest text-text-muted">© 2026 WeDoWork Agency</span>
          </div>
       </div>
     </footer>

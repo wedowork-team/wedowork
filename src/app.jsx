@@ -1,6 +1,7 @@
-import UserDashboard from "./pages/UserDashboard";
 import { useState } from 'react';
+import UserDashboard from "./pages/UserDashboard";
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -98,3 +99,4 @@ export default function App() {
     </Routes>
   );
 }
+

@@ -3,7 +3,7 @@ import MeteorBackground from './meteor';
 
 export default function Hero() {
   return (
-    <section className="relative pt-32 pb-24 px-8 overflow-hidden" id="hero-section">
+    <section className="relative pt-24 pb-16 px-6 md:px-8 overflow-hidden" id="hero-section">
       <MeteorBackground />
 
       <div
@@ -20,7 +20,7 @@ export default function Hero() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-6xl md:text-8xl font-serif italic font-light mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-8xl font-serif italic font-light mb-6 leading-tight"
         >
           We Grow Your <br /> Business Online
         </motion.h1>
@@ -29,7 +29,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-text-secondary max-w-md mb-12 text-sm leading-relaxed"
+          className="text-text-secondary max-w-sm md:max-w-md mb-12 text-sm leading-relaxed"
         >
           High-performance interfaces and cinematic storytelling. Managing digital presence for maximum scalability and clinical precision.
         </motion.p>
